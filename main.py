@@ -4,6 +4,14 @@ from requests.models import ContentDecodingError
 
 to_curr = input("Of Which country you want to know the currency:-> ")
 
+
+for i in to_curr :
+    if not i.isalpha() :
+        print("no currency found")
+        exit()
+
+
+
 url = (f"https://www.google.com/search?q={to_curr}+to+inr")
 
 r = requests.get(url)
@@ -24,9 +32,14 @@ f.close()
 for line in lines:
     if "Indian Rupee" in line:
         data = line.split()
-        valcurr=data[data.index("Indian")-1].split(">")[1]
-        print(f"{to_curr} in Indian Rupee = "+valcurr)
-        break
+        try:
+            valcurr=data[data.index("Indian")-1].split(">")[1]
+            print(f"{to_curr} in Indian Rupee = "+valcurr)
+            break
+
+        except Exception:
+                print("no currency found")
+                exit()
 
 ast=int(input(f"what do you want to do \n1 indian to {to_curr} \n2 {to_curr} to indian\n enter here:-> "))
 
