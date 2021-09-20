@@ -1,54 +1,10 @@
-import requests
-from bs4 import BeautifulSoup
-from requests.models import ContentDecodingError
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+from PyQt5 import QtWidgets,uic
+from PyQt5.QtCore import *
 
-to_curr = input("Of Which country you want to know the currency:-> ")
-
-
-for i in to_curr :
-    if not i.isalpha() :
-        print("no currency found")
-        exit()
-
-
-
-url = (f"https://www.google.com/search?q={to_curr}+to+inr")
-
-r = requests.get(url)
-
-htmlContent = r.content
-
-soup = BeautifulSoup(htmlContent,'html.parser')
-data = soup.find_all("div")
-
-f = open("content.txt","w")
-f.write(str(soup.encode("utf-8")))
-f.close()
-
-f= open('content.txt','r')
-lines = f.readlines()
-f.close()
-
-for line in lines:
-    if "Indian Rupee" in line:
-        data = line.split()
-        try:
-            valcurr=data[data.index("Indian")-1].split(">")[1]
-            print(f"{to_curr} in Indian Rupee = "+valcurr)
-            break
-
-        except Exception:
-                print("no currency found")
-                exit()
-
-ast=int(input(f"what do you want to do \n1 indian to {to_curr} \n2 {to_curr} to indian\n enter here:-> "))
-
-if ast==1:
-    x=int(input("enter total indian rupee domination:-> "))
-    concurr=x/float(valcurr)
-    print(str(round(concurr,2))+" "+to_curr)
-
-elif ast==2:
-    x=int(input(f"enter total {to_curr} domination:-> "))
-    concurr=x*float(valcurr)
-    print(str(round(concurr,2))+" "+"Indian Rupee")
+app = QtWidgets.QApplication([])
+window = uic.loadUi("E:\GitHub\Currency-Calculator-Dynamic\gui.ui")
+window.show()
+app.exec()
