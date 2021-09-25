@@ -1,12 +1,10 @@
-f = open("countries.txt","r")
+f = open("country.txt","r")
 data = f.readlines()
 f.close()
-countries = []
-f = open("country.txt","w")
+f = open("country1.txt","w")
 for line in data:
-    for i in line.split("option"):
-        if len(i.split(">")[-1]) > 1:
-            f.write(i.split(">")[-1].split("</")[0])
-            # exit()
-            f.write("\n")
+    arr = line.split("    ")
+    string = arr[0]+"-"+arr[1]
+    print(string)
+    f.write(string)
 f.close()
