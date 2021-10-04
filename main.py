@@ -10,15 +10,19 @@ from requests.models import ContentDecodingError
 def getVal(cont1,cont2):
     cont1val = cont1.split("-")[1]
     cont2val = cont2.split("-")[1]
-    url = f"https://free.currconv.com/api/v7/convert?q={cont1val}_{cont2val}&compact=ultra&apiKey=74a0cba4d243cb75235e"
+    url = f"https://free.currconv.com/api/v7/convert?q={cont1val}_{cont2val}&compact=ultra&apiKey=b43a653672c4a94c4c26"
     r = requests.get(url)
     htmlContent = r.content
     soup = BeautifulSoup(htmlContent,'html.parser')
-    valCurr = float(soup.get_text().split(":")[1].removesuffix("}")) #{USD:70.00}
+    try:
+        valCurr = float(soup.get_text().split(":")[1].removesuffix("}")) #{USD:70.00}
+    except Exception:
+        print("Server down.")
+        exit()
     return valCurr
 
 app = QtWidgets.QApplication([])
-window = uic.loadUi("F:\github\Currency-Calculator-Dynamic\gui.ui")
+window = uic.loadUi("gui.ui")
 f = open("country.txt","r")
 window.dropDown1.addItem("Select")
 window.dropDown2.addItem("Select")
