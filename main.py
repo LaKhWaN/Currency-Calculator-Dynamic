@@ -18,8 +18,8 @@ def getVal(cont1,cont2):
     return valCurr
 
 app = QtWidgets.QApplication([])
-window = uic.loadUi("F:\github\Currency-Calculator-Dynamic\gui.ui")
-f = open("country.txt","r")
+window = uic.loadUi("C:/Users/prath/Desktop/Currency-Calculator-Dynamic/gui.ui")
+f = open("C:/Users/prath/Desktop/Currency-Calculator-Dynamic/country.txt","r")
 window.dropDown1.addItem("Select")
 window.dropDown2.addItem("Select")
 for i in f.readlines():
